@@ -16,7 +16,7 @@ def checkMySQLtables(user_name, password, host, db_name):
                                  host=host,
                                  database=db_name)
         cursor=con.cursor()
-        cursor.execute(" SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA='demodb'; ")
+        cursor.execute(" SELECT TABLE_NAME FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA={}; ".format(db_name))
         
         for row in cursor.fetchall():
             cursor.execute("SELECT LAST_INSERT_ID() from {} group by last_insert_id();".format(row[0]))
